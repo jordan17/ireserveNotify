@@ -8,7 +8,9 @@ public enum StoreCode {
     R499("Canton Road"),
     R485("Festival Walk"),
     R428("ifc mall"),
-    R610("New Town Plaza");
+    R610("New Town Plaza"),
+    R673("APM");
+
     String desc;
     String getDesc() {return this.desc;}
     StoreCode(String desc) {this.desc = desc;}

@@ -60,7 +60,7 @@ public class MainActivity extends Activity {
     PendingIntent pendingIntent ; // 取得PendingIntent
     Timer timer;
     TimerTask timerTask;
-    //String jsonUrl = "http://192.168.0.2:8080/resources/json/avail.json";
+    //String jsonUrl = "http://192.168.0.2:8080/resources/json/avail2.json";
     String jsonUrl = "https://reserve.cdn-apple.com/HK/zh_HK/reserve/iPhone/availability.json";
     // Sets an ID for the notification
     int mNotificationId = 999;
@@ -91,7 +91,11 @@ public class MainActivity extends Activity {
                 }
             } catch (JSONException e) {
                 //e.printStackTrace();
-                runOnUiThread(new Runnable(){public void run(){resultText.setText("No response");}});
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        resultText.setText("No Response");
+                    }
+                });
             }
         }
         boolean available = false;
@@ -152,7 +156,7 @@ public class MainActivity extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    jsonUrl = "http://192.168.0.2:8080/resources/json/avail.json";
+                    jsonUrl = "http://192.168.0.2:8080/resources/json/avail2.json";
                 }
                 else {
                     jsonUrl =  "https://reserve.cdn-apple.com/HK/zh_HK/reserve/iPhone/availability.json";
@@ -233,6 +237,7 @@ public class MainActivity extends Activity {
                 Uri.parse("android-app://hk.qoq.myapplication/http/host/path")
         );
         AppIndex.AppIndexApi.end(client, viewAction);
+        timer.cancel();
         client.disconnect();
     }
 
@@ -292,12 +297,16 @@ public class MainActivity extends Activity {
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
+                updateResultText(e.getClass().getName());
             } catch (IOException e) {
                 e.printStackTrace();
+                updateResultText(e.getClass().getName());
             } catch (JSONException e) {
                 e.printStackTrace();
+                updateResultText(e.getClass().getName());
             } catch (Exception e) {
                 e.printStackTrace();
+                updateResultText(e.getClass().getName());
             } finally {
                 if (connection != null) {
                     connection.disconnect();
@@ -313,6 +322,13 @@ public class MainActivity extends Activity {
             return null;
         }
 
+        private void updateResultText(final String result) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    resultText.setText(result);
+                }
+            });
+        }
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);

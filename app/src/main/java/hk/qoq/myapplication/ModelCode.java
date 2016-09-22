@@ -10,11 +10,12 @@ public enum ModelCode {
      plusBlack256("MN4E2ZP/A"),
      plusSilver128("MN492ZP/A"),
      plusSilver256("MN4F2ZP/A"),
-     plusGold128("MN4J2ZP/A"),
-     plusGold256("MN4A2ZP/A"),
-     plusPink128("MN4K2ZP/A"),
-     plusPink256("MN4C2ZP/A"),
+    plusGold256("MN4J2ZP/A"),
+    plusGold128("MN4A2ZP/A"),
+    plusPink128("MN4C2ZP/A"),
+    plusPink256("MN4K2ZP/A"),
     plusBlack32("MNQH2ZP/A");
+
     String model;
     String getModel() {return this.model;}
     ModelCode(String model) {
